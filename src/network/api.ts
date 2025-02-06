@@ -22,7 +22,7 @@ async function fetchData(input: RequestInfo, init?: RequestInit) {
 }
 
 export async function getLoggedInUser(): Promise<User> {
-    const response = await fetchData(`${BACKEND_URL}/api/users`, {method: "GET"});
+    const response = await fetchData(`${BACKEND_URL}api/users`, {method: "GET"});
     return response.json();
 }
 
@@ -33,7 +33,7 @@ export interface SignUpCredentials{
 }
 
 export async function signUp(credentials: SignUpCredentials): Promise<User> {
-    const response = await fetchData(`${BACKEND_URL}/api/users/signup`, {
+    const response = await fetchData(`${BACKEND_URL}api/users/signup`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export interface LoginCredentials{
 }
 
 export async function login(credentials: LoginCredentials): Promise<User> {
-    const response = await fetchData(`${BACKEND_URL}/api/users/login`, {
+    const response = await fetchData(`${BACKEND_URL}api/users/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export async function login(credentials: LoginCredentials): Promise<User> {
 }
 
 export async function logout() {
-    await fetchData(`${BACKEND_URL}/api/users/logout`, {method: "POST"})
+    await fetchData(`${BACKEND_URL}api/users/logout`, {method: "POST"})
 }
 
 interface ReturnedProject {
@@ -69,12 +69,12 @@ interface ReturnedProject {
 }
 
 export async function fetchTasks(projectId: string): Promise<ReturnedProject> {
-    const response = await fetchData(`${BACKEND_URL}/api/projects/${projectId}`, {method: "GET"});
+    const response = await fetchData(`${BACKEND_URL}api/projects/${projectId}`, {method: "GET"});
     return response.json();
 }
 
 export async function fetchProjects(): Promise<Project[]> {
-    const response = await fetchData(`${BACKEND_URL}/api/projects`, {method: "GET"});
+    const response = await fetchData(`${BACKEND_URL}api/projects`, {method: "GET"});
     return response.json();
 }
 
@@ -93,7 +93,7 @@ export interface ProjectInput {
 }
 
 export async function createTask(task: TaskInput): Promise<Task> {
-    const response = await fetchData(`${BACKEND_URL}/api/tasks`, {
+    const response = await fetchData(`${BACKEND_URL}api/tasks`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export async function createTask(task: TaskInput): Promise<Task> {
 }
 
 export async function createProject(project: ProjectInput): Promise<Project> {
-    const response = await fetchData(`${BACKEND_URL}/api/projects`, {
+    const response = await fetchData(`${BACKEND_URL}api/projects`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export async function createProject(project: ProjectInput): Promise<Project> {
 }
 
 export async function updateTask(taskId: string, task: TaskInput): Promise<Task> {
-    const response = await fetchData(`${BACKEND_URL}/api/tasks/${taskId}`, {
+    const response = await fetchData(`${BACKEND_URL}api/tasks/${taskId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export async function updateTask(taskId: string, task: TaskInput): Promise<Task>
 }
 
 export async function updateProject(projectId: string, project: ProjectInput): Promise<Project> {
-    const response = await fetchData(`${BACKEND_URL}/api/projects/${projectId}`, {
+    const response = await fetchData(`${BACKEND_URL}api/projects/${projectId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
@@ -137,9 +137,9 @@ export async function updateProject(projectId: string, project: ProjectInput): P
 }
 
 export async function deleteTask(taskId:string) {
-    await fetchData(`${BACKEND_URL}/api/tasks/${taskId}`, { method: "DELETE" });
+    await fetchData(`${BACKEND_URL}api/tasks/${taskId}`, { method: "DELETE" });
 }
 
 export async function deleteProject(projectId:string) {
-    await fetchData(`${BACKEND_URL}/api/projects/${projectId}`, { method: "DELETE" });
+    await fetchData(`${BACKEND_URL}api/projects/${projectId}`, { method: "DELETE" });
 }

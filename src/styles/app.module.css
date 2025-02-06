@@ -1,0 +1,121 @@
+.pageContainer {
+    padding: 32px 0;
+}
+
+.appBackground {
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.navbarCustom {
+    background-color: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(5px); 
+    transition: background-color 0.3s ease;
+}
+
+.navbarCustom:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbarCustom .navbar-brand,
+.navbarCustom .navbar-nav .nav-link {
+    color: white !important; 
+    transition: color 0.3s ease;
+}
+
+.navbarCustom .navbar-brand:hover,
+.navbarCustom .navbar-nav .nav-link:hover {
+    color: #ddd !important; 
+}
+
+.navbarCustom .navbar-toggler {
+    border-color: white;
+}
+
+.hero {
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: rgb(252, 243, 220);
+
+}
+
+.hero p{
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: rgb(252, 243, 220);
+}
+
+.cardContainer {
+    position: relative; 
+    min-height: 500px; 
+}
+
+.cardTopCenter {
+    margin-bottom: 50px;
+    background-color: rgb(220, 220, 220);
+}
+
+.cardBottomContainer { /* Styles for the container */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: center; /* Center the cards horizontally */
+}
+
+.cardBottom { /* Combined styles for both bottom cards */
+    width: 20rem;
+    height: 10rem;
+    margin: 20px; /* Add margin between cards */
+    background-color: rgb(220, 220, 220);
+}
+
+@media (max-width: 768px) {
+    .cardBottom {
+        width: 100%; /* Make cards full width on smaller screens */
+        margin: 10px 0; /* Adjust margin for vertical spacing */
+    }
+    .cardTopCenter {
+        margin-bottom: 10px;
+    }
+}
+
+.cardFlex {
+    display: flex;
+    flex-direction: column; 
+    width: 100%; 
+}
+
+.rowFlex {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%; 
+    margin-bottom: 5px;
+}
+
+.rowFlex > div { 
+    display: flex;
+    align-items: center;
+}
+
+.rowFlex svg {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+

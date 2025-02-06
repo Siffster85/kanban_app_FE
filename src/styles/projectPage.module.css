@@ -1,0 +1,20 @@
+.projectPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.projectGrid {
+    width: 100%;
+}
+
+.project {
+    height: 200px;
+    min-width: 150px;
+    transition: box-shadow .2s ease-in-out;
+    cursor: pointer;
+}
+
+.project:hover {
+    box-shadow: rgba(255, 255, 255, 5) 0px 6px 12px 0px, rgba(255, 255, 255, 5) 0px 0px 0px 1px;
+}

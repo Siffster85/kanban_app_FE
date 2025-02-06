@@ -6,7 +6,7 @@ import { User } from "../models/userModel";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
 
 async function fetchData(input: RequestInfo, init?: RequestInit) {
-    const response = await fetch(input, init);
+    const response = await fetch(input, { ...init, credentials: 'include' });
     if (response.ok) {
         return response;
     } else {

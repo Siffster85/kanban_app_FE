@@ -8,7 +8,6 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.121",
     "@types/react": "^18.3.14",
     "@types/react-dom": "^18.3.2",
     "ajv": "^8.12.0",
@@ -46,5 +45,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/aria-query": "^5.0.4",
+    "@types/babel__core": "^7.20.5",
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__template": "^7.4.4",
+    "@types/babel__traverse": "^7.20.6",
+    "@types/body-parser": "^1.19.5",
+    "@types/bonjour": "^3.5.13",
+    "@types/connect": "^3.4.38",
+    "@types/eslint": "^9.6.1",
+    "@types/eslint-scope": "^3.7.7",
+    "@types/estree": "^1.0.6",
+    "@types/node": "^22.13.1",
+    "@types/prettier": "^3.0.0",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "@types/trusted-types": "^2.0.7"
   }
 }

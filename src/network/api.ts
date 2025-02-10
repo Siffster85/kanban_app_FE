@@ -1,66 +1,69 @@
+import axios from 'axios';
 import { ConflictError, UnauthorisedError } from "../errors/http_errors";
 import { Project } from "../models/projectModel";
 import { Task } from "../models/taskModel";
 import { User } from "../models/userModel";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-async function fetchData(input: RequestInfo, init?: RequestInit) {
-    const response = await fetch(input, { ...init, credentials: 'include', mode: "cors" });
-    if (response.ok) {
-        return response;
-    } else {
-        const errorBody = await response.json();
-        const errorMessage = errorBody.error;
-        if(response.status === 401) {
-            throw new UnauthorisedError(errorMessage)
-        } else if (response.status === 409) {
-            throw new ConflictError(errorMessage)
-        } else 
-        throw Error(`Request failed with status: ${response.status}, ${errorMessage}`);
+async function fetchData(input: string, init?: any) { 
+    try {
+      const response = await axios(input, { ...init, withCredentials: true });
+      return response.data;
+    } catch (error: any) { 
+        if (axios.isAxiosError(error)) { 
+            const errorMessage = error.response?.data?.error || error.message; 
+            if (error.response?.status === 401) {
+                throw new UnauthorisedError(errorMessage);
+            } else if (error.response?.status === 409) {
+                throw new ConflictError(errorMessage);
+            } else {
+                throw Error(`Request failed with status: ${error.response?.status}, ${errorMessage}`);
+            }
+        } else {
+            throw Error(`An unexpected error occurred: ${error.message}`);
+        }
     }
 }
 
+
 export async function getLoggedInUser(): Promise<User> {
-    const response = await fetchData(`${BACKEND_URL}api/users`, {method: "GET"});
-    return response.json();
+    return fetchData(`${BACKEND_URL}api/users`, { method: "GET" });
 }
 
-export interface SignUpCredentials{
+export interface SignUpCredentials {
     username: string,
     email: string,
     password: string,
 }
 
 export async function signUp(credentials: SignUpCredentials): Promise<User> {
-    const response = await fetchData(`${BACKEND_URL}api/users/signup`, {
+    return fetchData(`${BACKEND_URL}api/users/signup`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(credentials)
+        data: credentials
     });
-    return response.json();
 }
 
-export interface LoginCredentials{
+export interface LoginCredentials {
     username: string,
     password: string,
 }
 
 export async function login(credentials: LoginCredentials): Promise<User> {
-    const response = await fetchData(`${BACKEND_URL}api/users/login`, {
+    return fetchData(`${BACKEND_URL}api/users/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(credentials)
+        data: credentials
     });
-    return response.json();
 }
 
 export async function logout() {
-    await fetchData(`${BACKEND_URL}api/users/logout`, {method: "POST"})
+    await fetchData(`${BACKEND_URL}api/users/logout`, { method: "POST" });
 }
 
 interface ReturnedProject {
@@ -69,13 +72,11 @@ interface ReturnedProject {
 }
 
 export async function fetchTasks(projectId: string): Promise<ReturnedProject> {
-    const response = await fetchData(`${BACKEND_URL}api/projects/${projectId}`, {method: "GET"});
-    return response.json();
+    return fetchData(`${BACKEND_URL}api/projects/${projectId}`, { method: "GET" });
 }
 
 export async function fetchProjects(): Promise<Project[]> {
-    const response = await fetchData(`${BACKEND_URL}api/projects`, {method: "GET"});
-    return response.json();
+    return fetchData(`${BACKEND_URL}api/projects`, { method: "GET" });
 }
 
 export interface TaskInput {
@@ -93,53 +94,49 @@ export interface ProjectInput {
 }
 
 export async function createTask(task: TaskInput): Promise<Task> {
-    const response = await fetchData(`${BACKEND_URL}api/tasks`, {
+    return fetchData(`${BACKEND_URL}api/tasks`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(task)
+        data: task
     });
-    return response.json();
 }
 
 export async function createProject(project: ProjectInput): Promise<Project> {
-    const response = await fetchData(`${BACKEND_URL}api/projects`, {
+    return fetchData(`${BACKEND_URL}api/projects`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(project)
+        data: project
     });
-    return response.json();
 }
 
 export async function updateTask(taskId: string, task: TaskInput): Promise<Task> {
-    const response = await fetchData(`${BACKEND_URL}api/tasks/${taskId}`, {
+    return fetchData(`${BACKEND_URL}api/tasks/${taskId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(task)
+        data: task
     });
-    return response.json();
 }
 
 export async function updateProject(projectId: string, project: ProjectInput): Promise<Project> {
-    const response = await fetchData(`${BACKEND_URL}api/projects/${projectId}`, {
+    return fetchData(`${BACKEND_URL}api/projects/${projectId}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(project)
+        data: project
     });
-    return response.json();
 }
 
-export async function deleteTask(taskId:string) {
+export async function deleteTask(taskId: string) {
     await fetchData(`${BACKEND_URL}api/tasks/${taskId}`, { method: "DELETE" });
 }
 
-export async function deleteProject(projectId:string) {
+export async function deleteProject(projectId: string) {
     await fetchData(`${BACKEND_URL}api/projects/${projectId}`, { method: "DELETE" });
 }

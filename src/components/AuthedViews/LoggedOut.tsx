@@ -31,6 +31,7 @@ const LoggedOut = () => {
                 This board is an example of my work, it's designed to be fast and smooth with limited clutter.<br />
                 If this is your first time, when you sign up a default project will be created for you with instructions for how to use this Kanban Board.<br />
                 The signup page has minimal checks, you don't need to use a real email address and you are free to use a very basic password.<br />
+                Please note, the backend is hosted on Render on the free tier so can take upto 1 minute to spin up, my apologies. <br />
                 </Card.Body>
             </Card>
             <div className={styles.cardBottomContainer}>

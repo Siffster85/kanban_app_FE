@@ -58,7 +58,8 @@ export async function login(credentials: LoginCredentials): Promise<User> {
         headers: {
             "Content-Type": "application/json",
         },
-        data: credentials
+        data: credentials,
+        credentials: 'include',
     });
 }
 
